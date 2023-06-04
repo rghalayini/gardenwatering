@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import "./App.css"
 import APIHelper from "./APIHelper.js"
 import { 
   TextField , 
@@ -11,8 +10,13 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
-  Container
+  Container, 
+  Select,
+  MenuItem,
+  FormHelperText,
+  InputLabel 
  } from '@mui/material';
+import { names } from "./constants.js";
 
 const styles = {
   root:{
@@ -26,6 +30,7 @@ const styles = {
     marginBottom: "10px"
   },
   button: {
+    margin: "20px 0",
     float: "right",
   },
 };
@@ -81,6 +86,48 @@ const App = () => {
   //   const updatedTodo = await APIHelper.updateItem(id, payload)
   //   setRecords(records.map(singleRecord => (singleRecord._id === id ? updatedTodo : singleRecord)))
   // }
+
+  const stringToColor = (string) => {
+    let hash = 0;
+    let i;
+  
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+  
+    return color;
+
+  };
+  
+  const stringAvatar = (name) => {
+    let initials = '';
+  
+    const nameParts = name.split(' ');
+    if (nameParts.length > 0) {
+      initials += nameParts[0][0];
+  
+      if (nameParts.length > 1) {
+        initials += nameParts[1][0];
+      }
+    }
+  
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: initials,
+    };
+  };
+
+
+
   
   return (
     <Container maxWidth="md" sx={styles.root} >
@@ -88,12 +135,29 @@ const App = () => {
       <Box style={styles.inputBox}>
       <form onSubmit={handleSubmit}>
 
-        <TextField id="name-input" 
+        {/* <TextField id="name-input" 
           label="Ditt namn *" 
           variant="outlined"           
           name="name"
           sx={styles.input}
-        />
+        /> */}
+
+        <FormHelperText>Ditt namn</FormHelperText> 
+        <Select
+          labelId="name-input-label"
+          id="name-input"
+          name="name"
+          label="Ditt namn *" 
+          placeholder="Ditt namn"
+          sx={styles.input}
+          >
+          {names.map((word) => (
+            <MenuItem key={word} value={word}>
+              {word}
+            </MenuItem>
+          ))}
+        </Select>
+
         <TextField id="comment-input" 
           label="Kommentarer" 
           variant="outlined"   
@@ -121,7 +185,7 @@ const App = () => {
             </Button>
           }>
             <ListItemAvatar>
-              <Avatar alt="name" src="/static/images/avatar/2.jpg" />
+              <Avatar alt="name" {...stringAvatar(name)} />
             </ListItemAvatar>
             <ListItemText
               primary={name}
