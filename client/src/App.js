@@ -130,7 +130,7 @@ const App = () => {
   
   return (
     <Container maxWidth="md" sx={styles.root} >
-        <Typography variant="h4">Trädgårdsföreningen vattning</Typography>
+        <Typography variant="h4">Växthuset</Typography>
       <Box style={styles.inputBox}>
       <form onSubmit={handleSubmit}>
 
