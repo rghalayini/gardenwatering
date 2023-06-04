@@ -5,7 +5,7 @@
 }
 body {
   /* background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
-  background-color: #d7f0fc;
+  /* background-color: #d7f0fc; */
   color: rgb(0, 0, 0);
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
@@ -16,33 +16,33 @@ header {
 }
 
 header,
-.add-container {
+/* .add-container {
   min-height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 20px;
-}
+} */
 
-.add-container input {
+/* .add-container input {
   max-width: 400px;
   min-width: 200px;
   margin-left: 20px;
-}
+} */
 
 .add-container input,
-.add-container button {
+/* .add-container button {
   padding: 0.5rem;
   font-size: 2rem;
   border: none;
   background: white;
-}
-.add-container button {
+} */
+/* .add-container button {
   color: #11a725;
   background: #f7fffe;
   cursor: pointer;
   transition: all 0.3s ease;
-}
+} */
 .add-container button:hover {
   background: #11a725;
   color: white;

@@ -15,8 +15,11 @@ router.get('/', async (req, res)=>{
 //submit a post
 router.post('/', async (req,res)=>{
     const post = new Post({
-        itemName: req.body.itemName,
-        store:req.body.store
+        name: req.body.name,
+        comments:req.body.comments,
+        date:req.body.date,
+        time:req.body.time,
+        createdAt: req.body.createdAt,
     })
     try{
         const savedPost = await post.save();

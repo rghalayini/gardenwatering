@@ -1,29 +1,48 @@
 import axios from "axios"
 
-const API_URL = "/items/"
+const API_URL = "/garden/"
 
-async function createItem(itemName) {
-  const { data: newTodo } = await axios.post(API_URL, {
-    itemName,
-  })
-  return newTodo
+const createItem = async (name, comments, date, time, createdAt) => {
+  try {
+    const response = await axios.post(API_URL, {
+      name,
+      comments,
+      date,
+      time,
+      createdAt
+    });
+    const newRecord = response.data;
+    return newRecord;
+  } catch (error) {
+    // Handle error if the creation fails
+    console.error('Error creating item:', error);
+    throw error;
+  }
+};
+
+const deleteItem = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}${id}`);
+    const message =response.data;
+    return message
+  }
+  catch (error){
+    console.error('Error deleting item:', error);
+    throw error;
+  }
+};
+
+const getAllItems = async() => {
+  try {
+    const response = await axios.get(API_URL)
+    const records = response.data
+    return records;
+  }catch (error){
+    console.error('Error getting all items:', error);
+    throw error;
+  }
 }
 
-async function deleteItem(id) {
-  const message = await axios.delete(`${API_URL}${id}`)
-  return message
-}
-
-async function updateItem(id, payload) {
-  const { data: newTodo } = await axios.put(`${API_URL}${id}`, payload)
-  return newTodo
-}
-
-async function getAllItems() {
-  const { data: todos } = await axios.get(API_URL)
-  return todos
-}
-
-const APIHelper = { createItem, deleteItem, updateItem, getAllItems }
+const APIHelper = { createItem, deleteItem, getAllItems }
 // export default { createItem, deleteItem, updateItem, getAllItems }
 export default APIHelper;
