@@ -1,17 +1,25 @@
 const mongoose = require('mongoose');
 
 const PostSchema = mongoose.Schema({
-    itemName:{
+    date:{
         type:String,
         required:true
     },
-    store: {
+    time: {
+        type:String,
+        required:true
+    },
+    name: {
+        type:String,
+        required:true
+    },
+    comments: {
         type:String,
         required:false
     }
 },
 {
-    collection: 'Items',
+    collection: 'garden',
 
 });
 
