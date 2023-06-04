@@ -35,7 +35,7 @@ const deleteItem = async (id) => {
 const getAllItems = async() => {
   try {
     const response = await axios.get(API_URL)
-    const records = response.data
+    const records = response.data.slice(-10)
     return records;
   }catch (error){
     console.error('Error getting all items:', error);

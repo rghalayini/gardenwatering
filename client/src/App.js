@@ -13,8 +13,7 @@ import {
   Container, 
   Select,
   MenuItem,
-  FormHelperText,
-  InputLabel 
+  FormHelperText
  } from '@mui/material';
 import { names } from "./constants.js";
 
@@ -135,7 +134,8 @@ const App = () => {
       <Box style={styles.inputBox}>
       <form onSubmit={handleSubmit}>
 
-        {/* <TextField id="name-input" 
+        {/*if we want to write the name manually
+         <TextField id="name-input" 
           label="Ditt namn *" 
           variant="outlined"           
           name="name"
@@ -173,7 +173,7 @@ const App = () => {
       <Box>
       {records
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      .map(({ _id, name, date, time, comments, createdAt }, i) => (
+      .map(({ _id, name, date, time, comments }, i) => (
         <Box key={i}>
           <ListItem 
             alignItems="flex-start"
